@@ -62,5 +62,18 @@ class ThreeDHST_Object(object):
     class for 3dhst objects
     """
     def __init__(self):
-        pass
+        self._uvsfr = None
+    
+    @property
+    def uvsfr(self):
+        if self._uvsfr is None:
+            #using rest frame uv, not corrected for dust
+            #self.L270 is fnu at 1400 Angstroms with AB zeropoint of 25
+            relative_abmag = 25.0 - 2.5*np.log10(self.L270)
+            absolute_abmag = relative_abmag - self.DM
+            Lnu = 10**(-0.4 * (absolute_abmag + 48.6)) * 1.196e40 # in erg/s/Hz
+            self._uvsfr = 1.4e-28 * Lnu #in solar masses per year
+            
+        return self._uvsfr
+    
         

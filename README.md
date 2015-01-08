@@ -5,3 +5,5 @@ forming galaxies is correlated with morphology.
 Using data from Skelton et al. and van der wel et al. 
 http://www.mpia-hd.mpg.de/homes/vdwel/3dhstcandels.html
 http://3dhst.research.yale.edu/Data.php
+
+This is from an idea from the Stellar Mass and Star Formation Rate session after talking with Louis Abramson and Dan Kelson.

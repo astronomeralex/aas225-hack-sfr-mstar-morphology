@@ -13,3 +13,8 @@ This is from an idea from the Stellar Mass and Star Formation Rate session after
 * maybe try [voronoi binning](http://www-astro.physics.ox.ac.uk/~mxc/software/#binning) or the [weighted version here](http://www.phy.ohiou.edu/~diehl/WVT/)
 * compare to [Wuyts et al. 2011](http://adslabs.org/adsabs/abs/2011ApJ...742...96W/)
 * try machine learning or n-d statistics to tease out relationships? PCA doesn't work too well
+* how to fit main sequence line
+	- medians in little bins, then fit line
+	- something that removes outliers? ask feigelson?
+	- some sort of sigma clipping?
+	- gaussian regression, loess, etc?

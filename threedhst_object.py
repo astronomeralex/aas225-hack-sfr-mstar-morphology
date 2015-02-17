@@ -63,11 +63,11 @@ class ThreeDHST_Object(object):
     """
     def __init__(self):
         self._uvsfr = None
+        self._uvsfr_cor = None
     
     @property
     def uvsfr(self):
         if self._uvsfr is None:
-            #using rest frame uv, not corrected for dust
             #self.L270 is fnu at 1400 Angstroms with AB zeropoint of 25
             relative_abmag = 25.0 - 2.5*np.log10(self.L270)
             absolute_abmag = relative_abmag - self.DM
@@ -75,5 +75,30 @@ class ThreeDHST_Object(object):
             self._uvsfr = 1.4e-28 * Lnu #in solar masses per year
             
         return self._uvsfr
-    
+
+    @property
+    def uvsfr_cor(self):
+        """
+        assuming calzetti law, k_lambda @1400 Angstroms with R_V = 4.05 is 10.77
+        #using fast Av
+        """
+        if self._uvsfr_cor == None:
+            k1400 = 10.775
+            k1400lower = 9.975
+            k1400upper = 11.575
+            Rv = 4.05
+            Rvlower = 4.05 - 0.8
+            Rvupper = 4.05 + 0.8
+            A1400 = self.Av * k1400 / Rv
+            A1400lower = self.Av * k1400upper / Rvupper #these are switch on purpose
+            A1400upper = self.Av * k1400lower / Rvlower
+            sfrcor = self.uvsfr * 10**(0.4*A1400)
+            sfrcorlower = self.uvsfr * 10**(0.4*A1400lower)
+            sfrcorupper = self.uvsfr * 10**(0.4*A1400upper)
+            self._uvsfr_cor = [sfrcor, sfrcor - sfrcorlower, sfrcorupper - sfrcor ]
+
+        return self._uvsfr_cor
+
+
+
         

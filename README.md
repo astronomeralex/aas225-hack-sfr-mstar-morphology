@@ -18,3 +18,4 @@ This is from an idea from the Stellar Mass and Star Formation Rate session after
 	- something that removes outliers? ask feigelson?
 	- some sort of sigma clipping?
 	- gaussian regression, loess, etc?
+	- thiel-sen!
